@@ -42,12 +42,11 @@
   examples web application, do not forget to remove the <!.. ..> that surrounds
   them. You will also need to set the passwords to something appropriate.
 -->
+<!--
   <role rolename="tomcat"/>
   <role rolename="role1"/>
-  <role rolename="admin"/>
-    
-  <user password="tomcat1234" roles="tomcat" username="tomcat"/>
-  <user password="both1234" roles="tomcat,role1" username="both"/>
-  <user password="role1234" roles="role1" username="role1"/>
-  <user password="admin1234" roles="admin" username="admin"/>
+  <user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
+  <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
+  <user username="role1" password="<must-be-changed>" roles="role1"/>
+-->
 </tomcat-users>

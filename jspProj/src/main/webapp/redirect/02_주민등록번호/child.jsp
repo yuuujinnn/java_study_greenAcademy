@@ -13,13 +13,13 @@
 		<tr>
 			<td>생년월일</td>
 			<td>
-			<input type="text" name="year"  value="" />-
-			<input type="text" name="month"  value="" />-
-			<input type="text" name="day"  value="" /></td>
+			<input type="text" name="year"  value="<%=request.getParameter("year") %>" />-
+			<input type="text" name="month"  value="<%=request.getParameter("month") %>" />-
+			<input type="text" name="day"  value="<%=request.getParameter("day") %>" /></td>
 		</tr>
 		<tr>
 			<td>이름</td>
-			<td><input type="text" name="pname" value="" /></td>
+			<td><input type="text" name="pname" value="<%=request.getParameter("ppname") %>" /></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">

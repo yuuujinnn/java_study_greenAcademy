@@ -2,6 +2,7 @@ package model_p;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 public class BoardDTO {
 
@@ -9,7 +10,6 @@ public class BoardDTO {
 	Date reg_date;
 	int id, cnt,seq, lev, gid;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd (E) HH:mm");
-	
 	public String getTitle() {
 		return title;
 	}
@@ -29,14 +29,30 @@ public class BoardDTO {
 		this.pw = pw;
 	}
 	public String getUpfile() {
+		
+		if(	upfile==null || 
+			upfile.trim().equals("") || 
+			upfile.trim().equals("null")) {
+			upfile = "";
+		}
+		
 		return upfile;
 	}
+	
+	public boolean isImg() {
+		boolean res = Pattern.matches(".*[.](jpg|bmp|png|gif)", getUpfile().toLowerCase());
+		
+		return res;
+	}
+	
+	
 	public void setUpfile(String upfile) {
 		this.upfile = upfile;
 	}
 	public String getContent() {
 		return content;
 	}
+	
 	public String getContentBr() {
 		return content.replaceAll("\n", "<br/>");
 	}
@@ -46,9 +62,11 @@ public class BoardDTO {
 	public Date getReg_date() {
 		return reg_date;
 	}
+	
 	public String getReg_dateStr() {
 		return sdf.format(reg_date);
 	}
+	
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
@@ -82,7 +100,6 @@ public class BoardDTO {
 	public void setGid(int gid) {
 		this.gid = gid;
 	}
-	
 	@Override
 	public String toString() {
 		return "BoardDTO [id=" + id + ", title=" + title + ", pname=" + pname + ", pw=" + pw + ", upfile=" + upfile

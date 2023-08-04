@@ -6,15 +6,14 @@ import javax.servlet.http.HttpServletResponse;
 import control.BoardService;
 import model_p.BoardDAO;
 
-public class BDetail implements BoardService{
+public class BModifyForm implements BoardService{
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		request.setAttribute("mainTitle", "게시판 상세");
+		request.setAttribute("mainTitle", "게시판 수정");
 		System.out.println("BDetail.execute()실행");
 		
-		int id = Integer.parseInt(request.getParameter("id")); //getParameter 로 가져오면 문자? 로 되어서 int로 변경
-		new BoardDAO().addCount(id);
+		int id = Integer.parseInt(request.getParameter("id")); 
 		request.setAttribute("mainData", new BoardDAO().detail(id));
 	}
 	

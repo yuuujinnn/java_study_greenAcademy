@@ -1,7 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardController
+ * Servlet implementation class NoneController
  */
-@WebServlet("/board/*")
-public class BoardController extends HttpServlet {
+@WebServlet("/noneJsp/*")
+public class NoneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardController() {
+    public NoneController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,37 +28,20 @@ public class BoardController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		//System.out.println(request.getRequestURI());
-		//System.out.println(request.getContextPath()+"/board/");
-		
 		String serviceStr = request.getRequestURI().substring(
-				(request.getContextPath()+"/board/").length()
+				(request.getContextPath()+"/noneJsp/").length()
 				);
 		System.out.println(serviceStr);
-
 		
 		try {
-			request.setCharacterEncoding("UTF-8");
-			request.setAttribute("mainPage", serviceStr);
-			
 			BoardService service = (BoardService)Class.forName("ser_p."+serviceStr).newInstance();
 			service.execute(request,response);
 			
-			
-			RequestDispatcher dispatcher = 
-					request.getRequestDispatcher("/views/template.jsp");
-			
-			dispatcher.forward(request, response);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
 
 	/**
@@ -71,4 +53,3 @@ public class BoardController extends HttpServlet {
 	}
 
 }
-

@@ -9,7 +9,7 @@
 	<tr>
 		<td><a href="/mvcProj/info">회사소개</a></td>
 		<td><a href="/mvcProj/product">제품</a></td>
-		<td><a href="/mvcProj/gallery">갤러리</a></td>
+		<td><a href="/mvcProj/gallery/GList">갤러리</a></td>
 		<td><a href="/mvcProj/board/BList">게시판</a></td>
 	</tr>
 </table>

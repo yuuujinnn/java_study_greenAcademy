@@ -19,24 +19,26 @@ public class FileDown implements BoardService{
 		
 		
 		try {
+			// 서버에서 파일가져오는애
 			FileInputStream fis = new FileInputStream(path+"\\"+fName);
 			String encFName = URLEncoder.encode(fName,"utf-8");
 			System.out.println(fName+"->"+encFName);
 			response.setHeader("Content-Disposition", "attachment;filename="+encFName);
 			
+			// 파일 보내는애 서버에서 클라이언트한테 데이터 주는애 
 			ServletOutputStream sos = response.getOutputStream();
 			
 			byte [] buf = new byte[1024];
 			
 			//int cnt = 0;
-			
-			while(fis.available() > 0) {  // 읽을 내용이 남아 있다면
-				int len = fis.read(buf);  // 읽어서 -> buf 에 넣음
-										  // len : 넣은 byte 길이     1024씩 넣다가 찌꺼기 넣기
-				sos.write(buf, 0, len);   // 보낸다 : buf의 0부터 len 만큼 
+			while(fis.available()>0) { //읽을 내용이 남아 있다면
+				int len = fis.read(buf);  //읽어서 -> buf 에 넣음
+											//len : 넣은 byte 길이
+				
+				sos.write(buf, 0, len); //보낸다 :  buf의 0부터 len 만큼
 				
 				//cnt ++;
-				//System.out.println(cnt + ":" + len);
+				//System.out.println(cnt+":"+len);
 			}
 			
 			sos.close();

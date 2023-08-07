@@ -1,7 +1,9 @@
+<%@page import="model_p.PageData"%>
 <%@page import="model_p.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	PageData pd = (PageData)request.getAttribute("pd");
 	BoardDTO dto = (BoardDTO)request.getAttribute("mainData");
 %>    
 <table border="">
@@ -30,10 +32,10 @@
 	</tr>
 	<tr>
 		<td colspan="2"  align="right">
-			<a href="BList">목록으로</a>
-			<a href="BDeleteForm?id=<%=dto.getId()%>">삭제</a>
-			<a href="BModifyForm?id=<%=dto.getId()%>">수정</a>
-			<a href="BReplyForm?id=<%=dto.getId()%>">답변</a>
+			<a href="BList?page=<%=pd.page%>">목록으로</a>
+			<a href="BDeleteForm?id=<%=dto.getId()%>&page=<%=pd.page%>">삭제</a>
+			<a href="BModifyForm?id=<%=dto.getId()%>&page=<%=pd.page%>">수정</a>
+			<a href="BReplyForm?id=<%=dto.getId()%>&page=<%=pd.page%>">답변</a>
 		</td>
 	</tr>
 </table>

@@ -1,3 +1,4 @@
+<%@page import="model_p.PageData"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model_p.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,14 +12,21 @@
 		<td width="50px">조회수</td>
 	</tr>
 <%
-int i = 0;
+
+PageData pd = (PageData)request.getAttribute("pd");
+int i = pd.start;
 for(BoardDTO dto : (ArrayList<BoardDTO>) request.getAttribute("mainData")) {
 i++;
 %>	
 	<tr align="center">
 		<td><%=i %></td>
-		<td>
-			<a href="BDetail?id=<%=dto.getId()%>"><%=dto.getTitle() %></a>
+		<td align="left">
+		<% for(int n=0; n<dto.getLev(); n++) { %>
+				&nbsp;&nbsp;
+		<% } if(dto.getLev()>0) { %>
+		└
+		<% } %>
+			<a href="BDetail?id=<%=dto.getId()%>&page=<%=pd.page%>"><%=dto.getTitle() %></a>
 		</td>
 		<td><%=dto.getPname() %></td>
 		<td><%=dto.getReg_date() %></td>
@@ -26,11 +34,23 @@ i++;
 	</tr>
 	<%} %>
 	<tr>
-		<td colspan="5"  align="center"></td>
+		<td colspan="5"  align="center">
+		<% if(pd.pageStart > 1) { %>
+			<a href="?page=<%=pd.pageStart-1%>">[이전]</a>
+		<% } for(int p = pd.pageStart; p <= pd.pageEnd; p++) { 
+			if(pd.page == p) {%>
+			[<%=p %>]
+		<% } else { %>
+				<a href = "?page=<%=p %>"><%=p %></a>
+		<% }} if (pd.pageEnd < pd.pageTotal) { %>
+			<a href="?page=<%=pd.pageEnd+1%>">[다음]</a>
+		<% } %>
+		</td>
+		
 	</tr>
 	<tr>
 		<td colspan="5"  align="right">
-			<a href="BWriteForm">글쓰기</a>
+			<a href="BWriteForm?page=<%=pd.page%>">글쓰기</a>
 		</td>
 	</tr>
 </table>

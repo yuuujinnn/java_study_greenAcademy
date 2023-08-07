@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model_p.PageData;
+
 /**
  * Servlet implementation class BoardController
  */
@@ -43,6 +45,7 @@ public class BoardController extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			request.setAttribute("mainPage", serviceStr);
+			request.setAttribute("pd", new PageData(request));
 			
 			BoardService service = (BoardService)Class.forName("ser_p."+serviceStr).newInstance();
 			service.execute(request,response);
